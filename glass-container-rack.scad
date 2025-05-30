@@ -11,16 +11,26 @@ $fs = 0.4;
 // *** Model Parameters ***
 
 // Diameter of the glass container
-container_diameter = 120;
+//
+// 1 cup = 97mm
+// 2 cup = 120mm
+// 4 cup = 148mm
+// 8 cup = 184mm
+container_diameter = 184;
 
 // Height of the glass container
-container_height = 62;
+//
+// 1 cup = 52mm
+// 2 cup = 62mm
+// 4 cup = 76mm
+// 8 cup = 87mm
+container_height = 87;
 
 // Wall thickness of the rack.  This is the space from the cutout of the container around all edges.
-wall_thickness = 1;
+wall_thickness = 2;
 
 // Number of glass containers per row.
-num_containers_per_row = 4;
+num_containers_per_row = 1;
 
 // *** "Private" variables ***
 
@@ -28,6 +38,7 @@ base_width = container_diameter;
 base_depth = container_height + (2 * wall_thickness);
 base_height = container_diameter * 0.25; // Height of the base is 25% of the container diameter
 
+// Overlap between segments in the base.  This is to ensure that the segments are connected.
 segment_overlap = 0.1;
 
 // 
