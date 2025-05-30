@@ -14,18 +14,18 @@ $fs = 0.4;
 container_diameter = 120;
 
 // Height of the glass container
-container_height = 60;
+container_height = 62;
 
 // Wall thickness of the rack.  This is the space from the cutout of the container around all edges.
 wall_thickness = 4;
 
 // Number of glass containers per row.
-num_containers_per_row = 3;
+num_containers_per_row = 2;
 
 
 // *** "Private" variables ***
 
-base_width = container_diameter + (2 * wall_thickness);
+base_width = container_diameter;
 base_depth = container_height + (2 * wall_thickness);
 base_height = container_diameter * 0.25; // Height of the base is 25% of the container diameter
 
@@ -41,28 +41,36 @@ module glass_container_base(row) {
             // First Row
             corner_rounding = 2;
             round_except = [BOTTOM, BACK];
-            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+            make_base_segment(y_offset = y_offset, 
+                corner_rounding = corner_rounding, 
+                round_except = round_except, 
+                segment_depth = base_depth);
         } else if (row == (num_containers_per_row - 1)) {
             // Last Row
             corner_rounding = 2;
             round_except = [BOTTOM, FRONT];
-            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+            make_base_segment(y_offset = (y_offset - (wall_thickness * 2)), 
+                corner_rounding = corner_rounding, 
+                round_except = round_except,
+                segment_depth = base_depth);
         } else {
             // Middle Rows
             corner_rounding = 2;
             round_except = [BOTTOM, FRONT, BACK];
-            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+            make_base_segment(y_offset = (y_offset - wall_thickness), 
+                corner_rounding = corner_rounding, 
+                round_except = round_except,
+                segment_depth = base_depth);
+
         }
-
-
     } else {
+        // There is only one row.
         corner_rounding = 2;
         round_except = [BOTTOM];
-
-        translate([0, y_offset, 0])
-            cuboid([base_width, base_depth, base_height],
-                    rounding=corner_rounding, except=round_except);
-
+        make_base_segment(y_offset = y_offset, 
+            corner_rounding = corner_rounding, 
+            round_except = round_except,
+            segment_depth = base_depth);
     }
 
 }
@@ -70,9 +78,9 @@ module glass_container_base(row) {
 //
 // makes a single base segment for the specified row.
 //
-module make_base_segment(y_offset, corner_rounding, round_except) {
+module make_base_segment(y_offset, corner_rounding, round_except, segment_depth) {
     translate([0, y_offset, 0])
-        cuboid([base_width, base_depth, base_height],
+        cuboid([base_width, segment_depth, base_height],
                 rounding=corner_rounding, except=round_except);
 
 }
@@ -81,7 +89,7 @@ module make_base_segment(y_offset, corner_rounding, round_except) {
 // Creates the cutout for the glass container in the base.
 //
 module glass_container_cutout(row) {
-    y_offset = row * (base_depth);
+    y_offset = (row * base_depth) - (row * wall_thickness);
     z_offset = ((container_diameter / 2) + wall_thickness) - (base_height / 2);
 
     translate([0, y_offset, z_offset])
@@ -91,13 +99,13 @@ module glass_container_cutout(row) {
 
 module glass_container_row(row) {
 
-    difference() {
+    // difference() {
         // Create the base for the glass container
         glass_container_base(row);
         
         // Create the cutout for the glass container
-        glass_container_cutout(row);
-    }
+        // glass_container_cutout(row);
+    // }
 }
 
 //
