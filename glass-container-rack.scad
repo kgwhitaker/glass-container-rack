@@ -17,17 +17,18 @@ container_diameter = 120;
 container_height = 62;
 
 // Wall thickness of the rack.  This is the space from the cutout of the container around all edges.
-wall_thickness = 2;
+wall_thickness = 1;
 
 // Number of glass containers per row.
 num_containers_per_row = 4;
-
 
 // *** "Private" variables ***
 
 base_width = container_diameter;
 base_depth = container_height + (2 * wall_thickness);
 base_height = container_diameter * 0.25; // Height of the base is 25% of the container diameter
+
+segment_overlap = 0.1;
 
 // 
 // Creates a single rack for a glass container
@@ -50,7 +51,7 @@ module glass_container_base(row) {
             // Last Row
             echo("Last Row");
             round_except = [BOTTOM, FRONT];
-            last_y_offset = row * (base_depth - wall_thickness);
+            last_y_offset = ((row * (base_depth - wall_thickness)) - segment_overlap);
             make_base_segment(
                 y_offset = last_y_offset, 
                 corner_rounding = corner_rounding, 
@@ -61,7 +62,7 @@ module glass_container_base(row) {
             // Middle Rows
             echo("Middle Row");
             round_except = [BOTTOM, FRONT, BACK];
-            middle_y_offset = row * (base_depth - wall_thickness);
+            middle_y_offset = ((row * (base_depth - wall_thickness)) - segment_overlap);
             make_base_segment(
                 y_offset = middle_y_offset, 
                 corner_rounding = corner_rounding, 
