@@ -33,15 +33,48 @@ base_height = container_diameter * 0.25; // Height of the base is 25% of the con
 // Creates a single rack for a glass container
 //
 module glass_container_base(row) {
-    y_offset = row * (base_depth);
+    y_offset = (row * (base_depth));
 
-    corner_rounding = 2;
+    if (num_containers_per_row > 1) 
+    {
+        if (row == 0) {
+            // First Row
+            corner_rounding = 2;
+            round_except = [BOTTOM, BACK];
+            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+        } else if (row == (num_containers_per_row - 1)) {
+            // Last Row
+            corner_rounding = 2;
+            round_except = [BOTTOM, FRONT];
+            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+        } else {
+            // Middle Rows
+            corner_rounding = 2;
+            round_except = [BOTTOM, FRONT, BACK];
+            make_base_segment(y_offset = y_offset, corner_rounding = corner_rounding, round_except = round_except);
+        }
 
 
+    } else {
+        corner_rounding = 2;
+        round_except = [BOTTOM];
 
+        translate([0, y_offset, 0])
+            cuboid([base_width, base_depth, base_height],
+                    rounding=corner_rounding, except=round_except);
+
+    }
+
+}
+
+//
+// makes a single base segment for the specified row.
+//
+module make_base_segment(y_offset, corner_rounding, round_except) {
     translate([0, y_offset, 0])
         cuboid([base_width, base_depth, base_height],
-                rounding=corner_rounding, except=[BOTTOM]);
+                rounding=corner_rounding, except=round_except);
+
 }
 
 //
