@@ -19,10 +19,11 @@ container_height = 60;
 // Wall thickness of the rack.  This is the space from the cutout of the container around all edges.
 wall_thickness = 4;
 
+// Number of glass containers per row.
+num_containers_per_row = 3;
+
 
 // *** "Private" variables ***
-
-corner_rounding = 2;
 
 base_width = container_diameter + (2 * wall_thickness);
 base_depth = container_height + (2 * wall_thickness);
@@ -31,43 +32,49 @@ base_height = container_diameter * 0.25; // Height of the base is 25% of the con
 // 
 // Creates a single rack for a glass container
 //
-module glass_container_base() {
+module glass_container_base(row) {
+    y_offset = row * (base_depth);
 
-    // Create a base cube that is the diameter of the container plus the side wall thickness on each side.
+    corner_rounding = 2;
 
-    cuboid([base_width, base_depth, base_height],
-            rounding=corner_rounding, except=[BOTTOM]);
+
+
+    translate([0, y_offset, 0])
+        cuboid([base_width, base_depth, base_height],
+                rounding=corner_rounding, except=[BOTTOM]);
 }
 
 //
 // Creates the cutout for the glass container in the base.
 //
-module glass_container_cutout() {
-
+module glass_container_cutout(row) {
+    y_offset = row * (base_depth);
     z_offset = ((container_diameter / 2) + wall_thickness) - (base_height / 2);
 
-    translate([0, 0, z_offset])
+    translate([0, y_offset, z_offset])
         rotate([90, 0, 0]) 
             cylinder(d=container_diameter, h=container_height, anchor=LEFT + FRONT, center=true);
 }
 
+module glass_container_row(row) {
+
+    difference() {
+        // Create the base for the glass container
+        glass_container_base(row);
+        
+        // Create the cutout for the glass container
+        glass_container_cutout(row);
+    }
+}
 
 //
 // Main function build the model in its entirety.
 //
 module build_model() {
-    difference() {
-        // Create the base of the rack
-        glass_container_base();
-
-        // Create the cutout for the glass container
-        glass_container_cutout();
+    // Loop through rows to create the base and cutouts for each container
+    for (row = [0:num_containers_per_row - 1]) {
+        glass_container_row(row);
     }
-
-    // glass_container_base();
-    // glass_container_cutout();
-
-
 }
 
 // Build the model
