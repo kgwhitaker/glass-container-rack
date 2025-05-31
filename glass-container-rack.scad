@@ -27,10 +27,10 @@ container_diameter = 184;
 container_height = 87;
 
 // Wall thickness of the rack.  This is the space from the cutout of the container around all edges.
-wall_thickness = 2;
+wall_thickness = 1;
 
 // Number of glass containers per row.
-num_containers_per_row = 1;
+num_containers_per_row = 2;
 
 // *** "Private" variables ***
 

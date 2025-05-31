@@ -17,12 +17,11 @@ sized containers as we are always moving them around to get to the size we neede
 
 The `models` directory holds models that have been generated for the various sized food containers.  
 The naming convention for `stl` files is `glass-container-rack-<container_size>-<num_rows>`.  
-So, the file `glass-container-rack-2c-x4.stl` is a container rack for a 2 cup container with 4 rows. 
+So, the file `glass-container-rack-2c-x4.stl` is a container rack for a 2 cup container with 4 rows.
 
 The source code has measurements in the comments for what was used for each container size.
 
-The `3mf` files are slicer project files I used.  A suffix of `-mk3.3mf` was done in Prusa Slicer. 
-A suffix of `-a1mini.3mf` was done in Orca Slicer for a Bambu Lab A1 mini printer.
+The `3mf` files are [Orca Slicer](https://orcaslicer.com) project files I used. A suffix of `-mk3.3mf` is for a Prusa MK3s and `-a1mini.3mf` is for a Bambu Lab A1 mini.  
 
 ## Dependencies and Building the 3D Model
 
