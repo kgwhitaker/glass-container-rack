@@ -4,9 +4,7 @@
 
 include <BOSL2/std.scad>
 
-
 // *** Model Parameters ***
-
 /* [Model Parameters] */
 
 // Diameter of the glass container
@@ -17,28 +15,26 @@ container_diameter = 184;
 // 1 cup = 52mm, 2 cup = 62mm, 4 cup = 76mm, 8 cup = 87mm
 container_height = 87;
 
-// Thickness of wall between each row.
+// Thickness of wall between each container.
 wall_thickness = 1;
 
-// Number of glass containers per row.
-num_containers_per_row = 2;
+// Number of glass containers per rack.
+num_containers = 2;
 
 // *** "Private" variables ***
-
 /* [Hidden] */
 
+// OpenSCAD System Settings
 $fa = 1;
 $fs = 0.4;
 
+// Calculated Global Vars
 base_width = container_diameter;
 base_depth = container_height + (2 * wall_thickness);
+base_height = container_diameter * 0.25; //25% of the container diameter
 
-// Height of the base is 25% of the container diameter
-base_height = container_diameter * 0.25; 
-
-// Overlap between segments in the base.  
-// This is to ensure that the segments are connected.
-segment_overlap = 0.1;
+// Model settings
+segment_overlap = 0.1; // Overlap between segments in the base; ensure segments are connected
 
 // 
 // Creates a single rack for a glass container
@@ -47,7 +43,7 @@ module glass_container_base(row) {
     y_offset = (row * (base_depth));
     corner_rounding = 2;
 
-    if (num_containers_per_row > 1) 
+    if (num_containers > 1) 
     {
         if (row == 0) {
             // First Row
@@ -57,7 +53,7 @@ module glass_container_base(row) {
                 corner_rounding = corner_rounding, 
                 round_except = round_except, 
                 segment_depth = base_depth);
-        } else if (row == (num_containers_per_row - 1)) {
+        } else if (row == (num_containers - 1)) {
             // Last Row
             echo("Last Row");
             round_except = [BOTTOM, FRONT];
@@ -130,7 +126,7 @@ module glass_container_cutout(row) {
 //
 module build_model() {
     // Loop through rows to create the base and cutouts for each container
-    for (row = [0:num_containers_per_row - 1]) {
+    for (row = [0:num_containers - 1]) {
         glass_container_base(row);
     }
 }
