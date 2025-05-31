@@ -7,7 +7,7 @@ include <BOSL2/std.scad>
 
 // *** Model Parameters ***
 
-/* [Model Parmeters] */
+/* [Model Parameters] */
 
 // Diameter of the glass container
 // 1 cup = 97mm, 2 cup = 120mm, 4 cup = 148mm, 8 cup = 184mm
