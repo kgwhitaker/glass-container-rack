@@ -5,13 +5,13 @@ sized containers as we are always moving them around to get to the size we neede
 
 ## Model Parameters
 
-| Parameter              | Description                                                                                                                                                                                     |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| container_diameter     | Diameter of the container in millimeters. I found that adding two millimeters to the actual diameter provides the right amount of clearance to allow the container to easily slide in to place. |
-| container_height       | The hight of the container. Again add 1 or 2 mm for tolerance.                                                                                                                                  |
-| wall_thickness         | This is the thickness of the walls between each container. I found 1 mm is good for more than 1 row. If doing just 1 row, 2 mm is a good size.                                                  |
-| num_containers_per_row | This is how many containers you want to hold in the rack.                                                                                                                                       |
-|                        |                                                                                                                                                                                                 |
+| Parameter          | Description                                                                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| container_diameter | Diameter of the container in millimeters. I found that adding two millimeters to the actual diameter provides the right amount of clearance to allow the container to easily slide in to place. |
+| container_height   | The hight of the container. Again add 1 or 2 mm for tolerance.                                                                                                                                  |
+| wall_thickness     | This is the thickness of the walls between each container. I found 1 mm is good for more than 1 row. If doing just 1 row, 2 mm is a good size.                                                  |
+| num_containers     | This is how many containers you want to hold in the rack.                                                                                                                                       |
+|                    |                                                                                                                                                                                                 |
 
 ## Realized Models
 
@@ -21,7 +21,7 @@ So, the file `glass-container-rack-2c-x4.stl` is a container rack for a 2 cup co
 
 The source code has measurements in the comments for what was used for each container size.
 
-The `3mf` files are [Orca Slicer](https://orcaslicer.com) project files I used. A suffix of `-mk3.3mf` is for a Prusa MK3s and `-a1mini.3mf` is for a Bambu Lab A1 mini.  
+The `3mf` files are [Orca Slicer](https://orcaslicer.com) project files I used. A suffix of `-mk3.3mf` is for a Prusa MK3s and `-a1mini.3mf` is for a Bambu Lab A1 mini.
 
 ## Dependencies and Building the 3D Model
 
