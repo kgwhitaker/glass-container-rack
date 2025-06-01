@@ -2,6 +2,7 @@
 // A rack that holds round glass containers, such as Anchor Hocking food storage container, in a vertical position.
 //
 
+// The Belfry OpenScad Library, v2:  https://github.com/BelfrySCAD/BOSL2
 include <BOSL2/std.scad>
 
 // *** Model Parameters ***
