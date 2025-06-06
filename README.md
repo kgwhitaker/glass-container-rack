@@ -1,7 +1,9 @@
 # Glass Container Rack
 
 We use glass storage containers for storing various food items. I did not like nesting the different
-sized containers as we are always moving them around to get to the size we needed. This is a simple rack that will let you store the container on its side. These racks are built around the [Anchor Hocking _Snugfit_](https://www.anchorhocking.com/snug-fit/) containers. It is parameter driven, so models for different sized containers can be readily created.
+sized containers as we are always moving them around to get to the size we needed. This is a simple rack that will let 
+you store the container on its side. These racks are built around the [Anchor Hocking _Snugfit_](https://www.anchorhocking.com/snug-fit/) 
+containers. It is parameter driven, so models for different sized containers can be readily created.
 
 ## Model Parameters
 
