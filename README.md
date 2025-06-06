@@ -1,11 +1,17 @@
 # Glass Container Rack
 
 We use glass storage containers for storing various food items. I did not like nesting the different
-sized containers as we are always moving them around to get to the size we needed. This is a simple rack that will let 
-you store the container on its side. These racks are built around the [Anchor Hocking _Snugfit_](https://www.anchorhocking.com/snug-fit/) 
+sized containers as we are always moving them around to get to the size we needed. This is a simple rack that will let
+you store the container on its side. These racks are built around the [Anchor Hocking _Snugfit_](https://www.anchorhocking.com/snug-fit/)
 containers. It is parameter driven, so models for different sized containers can be readily created.
 
-## Model Parameters
+There are two models in this project:
+
+`glass-container-rack.scad` - This is the model to store the glass containers on their side.
+`glass-container-lid.scad` - This is storage for the lids. The intent is for the front of the lid rack to hold small lids sideways, and the
+back of the rack to hold larger lids.
+
+## Glass Container Model Parameters
 
 | Parameter          | Description                                                                                                                                                                                     |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -14,6 +20,17 @@ containers. It is parameter driven, so models for different sized containers can
 | wall_thickness     | This is the thickness of the walls between each container. I found 1 mm is good for more than 1 row. If doing just 1 row, 2 mm is a good size.                                                  |
 | num_containers     | This is how many containers you want to hold in the rack.                                                                                                                                       |
 |                    |                                                                                                                                                                                                 |
+
+## Glass Container Lid Model Parameters
+
+| Parameter              | Description                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| lid_rack_width         | Overall width of the lid rack                                                                       |
+| lid_rack_depth         | Overall depth of the lid rack                                                                       |
+| lid_rack_height        | Overall height of the lid rack                                                                      |
+| wall_thickness         | Thickness of the walls between compartments                                                         |
+| small_lid_cutout_depth | Small lid cutout depth. The remaining space will be split into two compartments for the large lids. |
+|                        |                                                                                                     |
 
 ## Realized Models
 
@@ -33,3 +50,4 @@ This model is built using the tools listed below. Install these tools and you ca
 - [The Belfry OpenScad Library, v2.0.](https://github.com/BelfrySCAD/BOSL2)
 
 ## Sample Output
+
