@@ -8,19 +8,29 @@ include <BOSL2/std.scad>
 // *** Model Parameters ***
 /* [Model Parameters] */
 
+
+// As a lid holder:
+// 2 cup = 125mm
+//
 // Diameter of the glass container
 // 1 cup = 97mm, 2 cup = 120mm, 4 cup = 148mm, 8 cup = 184mm
-container_diameter = 184;
+container_diameter = 125;
 
+// As a lid holder:
+// 2 cup = 48mm is 4 lids per compartment.
+//
 // Height of the glass container
 // 1 cup = 52mm, 2 cup = 62mm, 4 cup = 76mm, 8 cup = 87mm
-container_height = 87;
+container_height = 48;
 
 // Thickness of wall between each container.
 wall_thickness = 1;
 
 // Number of glass containers per rack.
 num_containers = 2;
+
+// True = Creates a support in the back of each compartment to support lids in the container.
+lid_support = true;
 
 // *** "Private" variables ***
 /* [Hidden] */
@@ -48,15 +58,24 @@ module glass_container_base(row) {
     {
         if (row == 0) {
             // First Row
-            echo("First Row");
-            round_except = [BOTTOM, BACK];
-            make_base_segment(y_offset = y_offset, 
-                corner_rounding = corner_rounding, 
-                round_except = round_except, 
-                segment_depth = base_depth);
+
+            if (lid_support) {
+                make_base_segment(y_offset = y_offset, 
+                    corner_rounding = corner_rounding, 
+                    round_except = [BOTTOM, BACK, FRONT], 
+                    segment_depth = base_depth);
+
+                lid_y_offset = y_offset - (container_height / 2);
+                lid_support(lid_y_offset);
+            } else {
+                make_base_segment(y_offset = y_offset, 
+                    corner_rounding = corner_rounding, 
+                    round_except = [BOTTOM, BACK], 
+                    segment_depth = base_depth);
+            }
+
         } else if (row == (num_containers - 1)) {
             // Last Row
-            echo("Last Row");
             round_except = [BOTTOM, FRONT];
             last_y_offset = ((row * (base_depth - wall_thickness)) - segment_overlap);
             make_base_segment(
@@ -65,9 +84,12 @@ module glass_container_base(row) {
                 round_except = round_except,
                 segment_depth = base_depth
             );
+            if (lid_support) {
+                lid_y_offset = last_y_offset - (container_height / 2);
+                lid_support(lid_y_offset);
+            }
         } else {
             // Middle Rows
-            echo("Middle Row");
             round_except = [BOTTOM, FRONT, BACK];
             middle_y_offset = ((row * (base_depth - wall_thickness)) - segment_overlap);
             make_base_segment(
@@ -76,16 +98,65 @@ module glass_container_base(row) {
                 round_except = round_except,
                 segment_depth = base_depth - wall_thickness
             );
+            if (lid_support) {
+                lid_y_offset = middle_y_offset - (container_height / 2) + segment_overlap;
+                lid_support(lid_y_offset);
+            }
         }
     } else {
         // There is only one row.
-        corner_rounding = 2;
-        round_except = [BOTTOM];
-        make_base_segment(y_offset = y_offset, 
-            corner_rounding = corner_rounding, 
-            round_except = round_except,
-            segment_depth = base_depth);
+        if (lid_support) {
+            round_except = [BOTTOM, FRONT];
+            make_base_segment(y_offset = y_offset, 
+                corner_rounding = corner_rounding, 
+                round_except = round_except,
+                segment_depth = base_depth);
+            
+            lid_y_offset = y_offset - (container_height / 2);
+            lid_support(lid_y_offset);
+        } else {
+            round_except = [BOTTOM];
+            make_base_segment(y_offset = y_offset, 
+                corner_rounding = corner_rounding, 
+                round_except = round_except,
+                segment_depth = base_depth);
+        }
     }
+}
+
+//
+// Creates an optional lid support for the back of the container.
+//
+module lid_support(lid_y_offset) {
+    z_offset = ((container_diameter / 2) + wall_thickness) - (base_height / 2);
+    x_offset = -(container_diameter / 2);
+
+    // Lid support the size of the container
+    translate([x_offset, lid_y_offset, z_offset])
+        color("red")
+            cuboid([container_diameter, wall_thickness, container_height],
+                        anchor=LEFT + BACK + TOP, rounding=20, except=[FRONT, BACK]);
+
+    // difference () {
+
+    //     // Lid support the size of the container
+    //     translate([0, lid_y_offset, z_offset])
+    //         color("red")
+    //             rotate([90, 0, 0]) 
+    //                 cyl(d=container_diameter, h=wall_thickness, anchor=LEFT + BACK, center=true);
+
+    //     // Cut off the top third of the lid support with a cuboid for easy access.
+    //     cut_z_offset = z_offset + (2 * (container_diameter / 3));
+    //     cut_x_offset = -(container_diameter / 2);
+    //     translate([cut_x_offset, lid_y_offset + (wall_thickness / 2), cut_z_offset])
+    //         color("blue")
+    //             cuboid([container_diameter, wall_thickness * 2, container_height],
+    //                     anchor=LEFT + BACK + TOP);
+
+    
+
+    // }
+
 
 }
 
