@@ -1,7 +1,7 @@
 //
-// Glass Container Lid - Initial Boilerplate
-//
 // This file is intended for designing a lid compatible with the glass container rack system.
+// This lid rack is intended for the 1c lids to be stored in a sideways orientation in fhe front,
+// and larger lids from the 8c and 4c containers to be stored in the back.
 //
 
 // The Belfry OpenScad Library, v2:  https://github.com/BelfrySCAD/BOSL2
