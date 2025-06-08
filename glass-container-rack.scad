@@ -136,28 +136,6 @@ module lid_support(lid_y_offset) {
         color("red")
             cuboid([container_diameter, wall_thickness, container_height],
                         anchor=LEFT + BACK + TOP, rounding=20, except=[FRONT, BACK]);
-
-    // difference () {
-
-    //     // Lid support the size of the container
-    //     translate([0, lid_y_offset, z_offset])
-    //         color("red")
-    //             rotate([90, 0, 0]) 
-    //                 cyl(d=container_diameter, h=wall_thickness, anchor=LEFT + BACK, center=true);
-
-    //     // Cut off the top third of the lid support with a cuboid for easy access.
-    //     cut_z_offset = z_offset + (2 * (container_diameter / 3));
-    //     cut_x_offset = -(container_diameter / 2);
-    //     translate([cut_x_offset, lid_y_offset + (wall_thickness / 2), cut_z_offset])
-    //         color("blue")
-    //             cuboid([container_diameter, wall_thickness * 2, container_height],
-    //                     anchor=LEFT + BACK + TOP);
-
-    
-
-    // }
-
-
 }
 
 //
