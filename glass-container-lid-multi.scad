@@ -55,6 +55,24 @@ module small_lid_cutout () {
 }
 
 //
+// Create dividers for the small lid cutout separating it into three compartments.
+//
+module small_lid_cutout_dividers() {
+    divider_width = (cutout_width - (2 * wall_thickness)) / 3;
+
+    y_offset = (lid_rack_depth - small_lid_cutout_depth) - wall_thickness;
+
+    for (i = [1, 2]) {
+        x_offset = wall_thickness + (divider_width * i);
+        translate([x_offset, y_offset, wall_thickness]) {
+            color("blue") {
+                cuboid([wall_thickness, small_lid_cutout_depth, lid_rack_height], anchor=BASE_ANCHOR);
+            }
+        }
+    }
+}
+
+//
 // Create two cutouts for the large lids, splitting the space evenly
 //
 module large_lid_cutouts() {
@@ -100,6 +118,7 @@ module build_model() {
         small_lid_cutout();
         large_lid_cutouts();
     }
+    small_lid_cutout_dividers();
 }
 
 build_model();
