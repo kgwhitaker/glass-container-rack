@@ -64,7 +64,7 @@ module small_lid_cutout_dividers() {
 
     for (i = [1, 2]) {
         x_offset = wall_thickness + (divider_width * i);
-        translate([x_offset, y_offset, wall_thickness]) {
+        translate([x_offset, y_offset, 0]) {
             color("blue") {
                 cuboid([wall_thickness, small_lid_cutout_depth, lid_rack_height], anchor=BASE_ANCHOR);
             }
