@@ -51,3 +51,31 @@ This model is built using the tools listed below. Install these tools and you ca
 
 ## Sample Output
 
+### Examples of various sized racks
+
+![Glass Container Rack Examples](images/glass-container-rack-examples.jpeg)
+
+### 2 Cup Container Rack in Use
+
+![Two Cup Containers in Use](images/2-cup-rack.jpeg)
+
+### 2 Cup Lid Rack
+
+![2 Cup Lid Rack](images/2-cup-lid-rack.jpeg)
+
+### 8 Cup Standing Rack
+
+For the 8 and 4 Cup Containers, we opted to use just a single rack
+in the back to stand it up vertically, then just stack the remainder in front.
+This let them fit nicely in our cabinet.
+
+![8 Cup Standing Rack](images/8-cup-standing-rack.jpeg)
+
+### Multi Sized Lid Rack
+
+This rack holds 8 cup, 4 cup and 1 cup lids.
+
+![Multi Sized Lid Rack](images/lid-rack-multi-size.jpeg)
+
+
+
