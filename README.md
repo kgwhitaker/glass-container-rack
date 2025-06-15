@@ -19,6 +19,7 @@ back of the rack to hold larger lids.
 | container_height   | The hight of the container. Again add 1 or 2 mm for tolerance.                                                                                                                                  |
 | wall_thickness     | This is the thickness of the walls between each container. I found 1 mm is good for more than 1 row. If doing just 1 row, 2 mm is a good size.                                                  |
 | num_containers     | This is how many containers you want to hold in the rack.                                                                                                                                       |
+| lid_support        | True = Creates a support in the back of each compartment to support lids in the container.                                                                                                      |
 |                    |                                                                                                                                                                                                 |
 
 ## Glass Container Lid Model Parameters
@@ -76,6 +77,3 @@ This let them fit nicely in our cabinet.
 This rack holds 8 cup, 4 cup and 1 cup lids.
 
 ![Multi Sized Lid Rack](images/lid-rack-multi-size.jpeg)
-
-
-
